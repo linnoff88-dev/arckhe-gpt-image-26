@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GPT Image 2.6 in practice — how to use OpenAI’s new image model</title>
+<meta name="description" content="A practical guide to GPT Image 2.6: Flare or Sunburst, complexity × quality, GIFs, SVGs, markup editing, saved references in ChatGPT, cost, and where it still gets things wrong. Includes ready-to-use prompts and a script.">
+<link rel="alternate" hreflang="pt-BR" href="https://inematds.github.io/gpt-image-26/guia/">
+<link rel="alternate" hreflang="en" href="https://inematds.github.io/gpt-image-26/guia/en/">
+<link rel="alternate" hreflang="es" href="https://inematds.github.io/gpt-image-26/guia/es/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0c0c10; --bg2:#14141b; --card:#16161e; --line:#272730;
+    --txt:#e9e9ee; --mut:#9a9aa6; --amb:#E2A23B; --amb2:#f0c070; --sky:#38bdf8; --pro:#cbd5e1;
+    color-scheme:dark;
+  }
+  body.light{
+    --bg:#f6f7f9; --bg2:#eceef2; --card:#ffffff; --line:#e1e3ea;
+    --txt:#1a1a22; --mut:#5b5b68; --amb:#b9791d; --amb2:#a16207; --sky:#0369a1; --pro:#b45309;
+    color-scheme:light;
+  }
+  body.light .hero .glow{opacity:.5}
+  body.light pre{background:#0e0e14;color:#d6d6e0}
+  body.light pre .c{color:#8a8a98}
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--bg);color:var(--txt);font:16px/1.65 Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+  h1,h2,h3{font-family:Sora,sans-serif;line-height:1.15;margin:0}
+  a{color:var(--amb);text-decoration:none}
+  code,pre{font-family:"JetBrains Mono",monospace}
+  .wrap{max-width:1160px;margin:0 auto;padding:0 22px}
+  .mut{color:var(--mut)} .amb{color:var(--amb)}
+  .chip{display:inline-block;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--amb);font-weight:600;font-family:Sora}
+  nav{position:sticky;top:0;z-index:30;backdrop-filter:blur(12px);background:rgba(12,12,16,.78);border-bottom:1px solid var(--line)}
+  nav .wrap{display:flex;align-items:center;gap:22px;height:60px}
+  nav .brand{display:flex;align-items:center;gap:8px;font-family:Sora;font-weight:800;letter-spacing:-.02em;color:var(--amb)}
+  nav .brand .emoji{font-size:1.25rem}
+  nav .sep{color:var(--mut);opacity:.45}
+  nav .inema{color:var(--sky);font-weight:600;font-size:.88rem;font-family:Sora}
+  nav .inema:hover{filter:brightness(1.15)}
+  nav .pro{color:var(--pro);font-weight:600;font-size:.88rem;font-family:Sora}
+  nav .pro:hover{filter:brightness(1.15)}
+  nav .clubpro{display:inline-flex;align-items:center;gap:6px}
+  nav .links{margin-left:auto;display:flex;align-items:center;gap:20px;font-size:.92rem}
+  nav .links a.sec{color:var(--mut)} nav .links a.sec:hover{color:var(--txt)}
+  .lang{display:inline-flex;gap:2px;font-family:Sora;font-size:.78rem}
+  .lang a{color:var(--mut);padding:.2em .45em;border-radius:6px} .lang a.on{color:var(--amb);background:rgba(226,162,59,.12)}
+  .tgl{background:var(--bg2);border:1px solid var(--line);color:var(--txt);width:38px;height:38px;border-radius:10px;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;font-size:1.05rem}
+  .tgl:hover{border-color:var(--amb)}
+  .btn{display:inline-block;background:var(--amb);color:#1a1206;font-weight:600;padding:.6em 1.05em;border-radius:10px;font-family:Sora}
+  .btn.ghost{background:transparent;color:var(--txt);border:1px solid var(--line)}
+  @media(max-width:760px){nav .links a.sec{display:none}}
+  @media(max-width:520px){nav .wrap{gap:8px;padding:8px 14px;height:auto;flex-wrap:wrap} nav .links{gap:8px;margin-left:0;width:100%;justify-content:space-between} nav .btn{padding:.45em .7em;font-size:.82rem} .tgl{width:34px;height:34px}}
+  .hero{position:relative;overflow:hidden;border-bottom:1px solid var(--line)}
+  .hero .glow{position:absolute;inset:-40% -20% auto auto;width:70%;height:600px;background:radial-gradient(closest-side,rgba(226,162,59,.22),transparent 70%);pointer-events:none}
+  .hero .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center;padding:74px 22px}
+  .hero h1{font-size:clamp(2.2rem,5vw,3.5rem);font-weight:800;letter-spacing:-.025em}
+  .hero p.lead{font-size:1.18rem;color:var(--mut);margin:1.1em 0 1.6em;max-width:34ch}
+  .hero .cta{display:flex;gap:12px;flex-wrap:wrap}
+  .hero figure{margin:0;border-radius:16px;overflow:hidden;border:1px solid var(--line);box-shadow:0 30px 80px -30px #000}
+  .hero figure img{width:100%;height:auto;display:block}
+  .resumo{padding:38px 0 34px;border-bottom:1px solid var(--line)}
+  .resumo p{font-size:1.12rem;line-height:1.7;max-width:74ch;margin:.55em 0 0}
+  @media(max-width:780px){.hero .wrap{grid-template-columns:1fr;padding:48px 22px}}
+  section{padding:62px 0;border-bottom:1px solid var(--line)}
+  section h2{font-size:clamp(1.5rem,3.4vw,2.1rem);font-weight:800;letter-spacing:-.02em}
+  section .sub{color:var(--mut);margin:.6em 0 2em;max-width:62ch}
+  .grid{display:grid;gap:16px}
+  .g3{grid-template-columns:repeat(3,1fr)} .g4{grid-template-columns:repeat(4,1fr)} .g2{grid-template-columns:repeat(2,1fr)}
+  @media(max-width:820px){.g3,.g4{grid-template-columns:1fr 1fr}}
+  @media(max-width:540px){.g2,.g3,.g4{grid-template-columns:1fr}}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px}
+  .card h3{font-size:1.05rem;margin-bottom:.4em}
+  .card p{color:var(--mut);font-size:.92rem;margin:0}
+  .num{display:inline-flex;width:30px;height:30px;align-items:center;justify-content:center;border-radius:8px;background:rgba(226,162,59,.14);color:var(--amb);font-family:Sora;font-weight:800;font-size:.9rem;margin-bottom:.7em}
+  .flow{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-top:10px}
+  .flow span{background:var(--bg2);border:1px solid var(--line);border-radius:999px;padding:.45em .9em;font-size:.85rem;font-family:Sora;font-weight:600}
+  .flow .arr{color:var(--amb);border:none;background:none;padding:0 .1em}
+  pre{background:#0a0a0e;border:1px solid var(--line);border-radius:12px;padding:16px 18px;overflow:auto;font-size:.86rem;line-height:1.6;color:#d6d6e0}
+  pre .c{color:#6f6f7c} pre .k{color:var(--amb2)} pre .s{color:#9ece6a}
+  .step{display:grid;grid-template-columns:46px minmax(0,1fr);gap:16px;margin-bottom:26px}
+  .step>div,.card{min-width:0}
+  p code,li code,td code{overflow-wrap:anywhere}
+  .step .b{width:46px;height:46px;border-radius:12px;background:var(--amb);color:#1a1206;font-family:Sora;font-weight:800;font-size:1.25rem;display:flex;align-items:center;justify-content:center}
+  .step h3{font-size:1.12rem;margin-bottom:.3em}
+  .step p{color:var(--mut);margin:.2em 0 .7em}
+  .ex{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  @media(max-width:680px){.ex{grid-template-columns:1fr}}
+  .ex figure{margin:0;border-radius:14px;overflow:hidden;border:1px solid var(--line)}
+  .ex figure img{width:100%;height:auto;display:block}
+  .ex figcaption{padding:12px 14px;font-size:.88rem;color:var(--mut);background:var(--card)}
+  .phase{display:flex;gap:14px;padding:16px 0;border-bottom:1px solid var(--line)}
+  .phase:last-child{border:none}
+  .phase .tag{flex:0 0 92px;font-family:Sora;font-weight:800;color:var(--amb)}
+  .phase .d strong{display:block;margin-bottom:.2em}
+  .phase .d span{color:var(--mut);font-size:.92rem}
+  footer{padding:46px 0;text-align:center;color:var(--mut);font-size:.9rem}
+  .pill{display:inline-block;border:1px solid var(--line);border-radius:999px;padding:.3em .8em;font-size:.78rem;color:var(--mut);margin:0 4px}
+  table.t{width:100%;border-collapse:collapse;font-size:.92rem;margin:6px 0 18px}
+  table.t th,table.t td{border-bottom:1px solid var(--line);padding:10px 12px;text-align:left;vertical-align:top}
+  table.t th{font-family:Sora;color:var(--amb);font-weight:600;font-size:.82rem;letter-spacing:.04em}
+  table.t td{color:var(--txt)} table.t td.m{color:var(--mut)}
+  .tw{overflow-x:auto}
+  .bars{display:grid;gap:10px;margin:8px 0 6px}
+  .bar{display:grid;grid-template-columns:140px minmax(0,1fr) 60px;gap:12px;align-items:center;font-size:.9rem}
+  .bar .tr{background:var(--bg2);border:1px solid var(--line);border-radius:8px;height:26px;overflow:hidden}
+  .bar .fi{height:100%;background:linear-gradient(90deg,var(--amb),var(--amb2))}
+  .bar .v{font-family:Sora;font-weight:800;color:var(--amb)}
+  .warn{border-left:3px solid var(--amb);background:var(--card);padding:14px 16px;border-radius:0 12px 12px 0;color:var(--mut);font-size:.92rem;margin:10px 0}
+  .ex figure.wide{grid-column:1/-1}
+  nav .links a.sec{white-space:nowrap} .ex{align-items:start}
+  @media(max-width:1320px){nav .links a.sec{display:none}}
+  @media(max-width:520px){.bar{grid-template-columns:96px minmax(0,1fr) 46px}}
+</style>
+</head>
+<body>
+
+<nav><div class="wrap">
+  <a class="brand" href="#top"><span class="emoji">🎨</span> GPT Image 2.6</a>
+  <span class="sep">|</span>
+  <span class="clubpro">
+    <a class="inema" href="https://inema.club" target="_blank" rel="noopener">INEMA.CLUB</a>
+    <span class="sep">-</span>
+    <a class="pro" href="https://inema.pro" target="_blank" rel="noopener">PRO</a>
+  </span>
+  <div class="links">
+    <a class="sec" href="#oque">What it is</a>
+    <a class="sec" href="#fluxo">How to think</a>
+    <a class="sec" href="#guia">User guide</a>
+    <a class="sec" href="#exemplos">Examples</a>
+    <a class="sec" href="#limites">Limits and cost</a>
+    <span class="lang"><a href="../">PT</a><a class="on" href="./">EN</a><a href="../es/">ES</a></span>
+    <button class="tgl" id="themeToggle" aria-label="Toggle theme" title="Toggle theme">🌙</button>
+    <a class="btn" href="https://github.com/inematds/gpt-image-26" target="_blank" rel="noopener">GitHub</a>
+  </div>
+</div></nav>
+
+<header class="hero" id="top">
+  <div class="glow"></div>
+  <div class="wrap">
+    <div>
+      <span class="chip">Practical guide · November 2026</span>
+      <h1>GPT Image 2.6 in <span class="amb">practice</span></h1>
+      <p class="lead">What’s new in OpenAI’s image model, which settings to use for each task, what it costs, and where it still gets things wrong.</p>
+      <div class="cta">
+        <a class="btn" href="#guia">Start the guide</a>
+        <a class="btn ghost" href="https://github.com/inematds/gpt-image-26" target="_blank" rel="noopener">View on GitHub</a>
+      </div>
+    </div>
+    <figure><img src="../assets/banner-en.jpg" alt="Banner: GPT Image 2.6 in practice"></figure>
+  </div>
+</header>
+
+<section id="resumo" class="resumo"><div class="wrap">
+  <span class="chip">In short</span>
+  <p>GPT Image 2.6 is OpenAI’s latest image model. It already runs in ChatGPT and Codex (OpenAI’s coding assistant), and you can also use it through the API, which lets programs and scripts access the model. This guide is for people who create images for posts, ads, logos, stories, or videos and want to make the most of its new features: the complexity setting (how much the model plans before drawing), animated GIFs, vector logos (SVG), and editing only the area you mark. You only need a ChatGPT account to use it; for the API, you need an OpenAI API key (billed separately from your subscription) and this repository’s <code>gerar.py</code> script, which only requires Python.</p>
+</div></section>
+
+<section id="video"><div class="wrap">
+  <span class="chip">Video</span>
+  <h2>Watch the explainer</h2>
+  <p class="sub">The project explained in a few minutes.</p>
+  <div style="position:relative;padding-top:56.25%;border-radius:16px;overflow:hidden;border:1px solid var(--line,#272730)"><iframe src="https://www.youtube.com/embed/bHTe58nwW3s" title="Watch the explainer" style="position:absolute;inset:0;width:100%;height:100%;border:0" loading="lazy" allowfullscreen></iframe></div>
+</div></section>
+
+
+<section id="oque"><div class="wrap">
+  <span class="chip">What it is</span>
+  <h2>A model that plans before it draws</h2>
+  <p class="sub">There are two models in the API, with the same features in both. You can’t choose in ChatGPT: version 2.6 is already there.</p>
+  <figure style="margin:0 0 26px;border-radius:16px;overflow:hidden;border:1px solid var(--line);box-shadow:0 30px 80px -30px #000"><img src="../assets/banner-grade-en.jpg" alt="Banner: Flare or Sunburst, complexity, quality, looping GIF, SVG logo, and markup" loading="lazy" style="width:100%;display:block"></figure>
+  <div class="grid g3">
+    <div class="card"><h3>🧠 Complexity</h3><p>New <code>complexity</code> setting (low, medium, high): how much the model plans object placement, how people interact, and how to handle several instructions at once. Default: high. There’s no separate charge.</p></div>
+    <div class="card"><h3>🎞️ GIF and SVG</h3><p>Generate a looping animated GIF (2 to 16 frames) or a vector SVG logo that you can open in an editor and enlarge without losing quality.</p></div>
+    <div class="card"><h3>⭕ Markup editing</h3><p>Circle where you want a change in the image, describe what you want, and the model edits only that area. Regular edits are also more faithful: the rest stays in place.</p></div>
+  </div>
+  <div class="tw"><table class="t">
+    <tr><th>Model</th><th>Purpose</th><th>When to use it</th></tr>
+    <tr><td><code>gpt-image-2.6-flare</code></td><td>Smaller and faster</td><td class="m">Drafts, quick posts, many variations, or when response time matters.</td></tr>
+    <tr><td><code>gpt-image-2.6-sunburst</code></td><td>Base model, more detail</td><td class="m">Final artwork, ads, precise edits, small text, demanding layouts.</td></tr>
+  </table></div>
+</div></section>
+
+<section id="fluxo"><div class="wrap">
+  <span class="chip">How to think</span>
+  <h2>One thing at a time</h2>
+  <p class="sub">The golden rule for 2.6: separate “planning” from “detailing.” Complexity handles the layout; quality handles the finish. Change one setting at a time and compare.</p>
+  <div class="flow">
+    <span>Choose the model</span><span class="arr">→</span>
+    <span>Prompt in sections</span><span class="arr">→</span>
+    <span>Layout right? (complexity)</span><span class="arr">→</span>
+    <span>Details right? (quality)</span><span class="arr">→</span>
+    <span>Check hands, text, reflections</span><span class="arr">→</span>
+    <span>Edit one thing at a time</span>
+  </div>
+  <div class="tw" style="margin-top:26px"><table class="t">
+    <tr><th>What went wrong</th><th>What to change</th></tr>
+    <tr><td>Object in the wrong place, misspelled word, people arranged nonsensically</td><td class="m">Increase <b>complexity</b> (keep quality the same).</td></tr>
+    <tr><td>Layout is right, but small text is unreadable or the texture looks poor</td><td class="m">Increase <b>quality</b> (keep complexity the same).</td></tr>
+    <tr><td>A small edit changed other parts</td><td class="m">Use <b>complexity low</b> and list what should stay the same.</td></tr>
+    <tr><td>It takes too long</td><td class="m">Switch to <b>Flare</b> or lower quality; use <code>xhigh</code> and <code>max</code> only if they solve a problem.</td></tr>
+  </table></div>
+</div></section>
+
+<section id="pre"><div class="wrap">
+  <span class="chip">Prerequisites</span>
+  <h2>What you need</h2>
+  <p class="sub">Most people only need ChatGPT. The API is for people who want to automate tasks.</p>
+  <div class="grid g3">
+    <div class="card"><h3>💬 ChatGPT</h3><p>A ChatGPT account (browser, computer, or phone). Version 2.6 is also available in Codex. Just ask for an image in the conversation.</p></div>
+    <div class="card"><h3>🔑 API (optional)</h3><p>Create a key at <a href="https://platform.openai.com/api-keys" target="_blank" rel="noopener">platform.openai.com/api-keys</a> and add credit to your API account: it’s billed separately; your ChatGPT subscription doesn’t cover it.</p><pre><span class="c"># Mac and Linux</span>
+<span class="k">export</span> OPENAI_API_KEY=<span class="s">"sua-chave"</span>
+<span class="c"># Windows (PowerShell)</span>
+<span class="k">$env:</span>OPENAI_API_KEY=<span class="s">"sua-chave"</span></pre></div>
+    <div class="card"><h3>🐍 Starter kit script</h3><p>Python 3.9 or newer (<a href="https://www.python.org/downloads/" target="_blank" rel="noopener">python.org</a>); no package installation needed. Download the kit with <a href="https://git-scm.com/downloads" target="_blank" rel="noopener">Git</a> or as a <a href="https://github.com/inematds/gpt-image-26/archive/refs/heads/main.zip">ZIP</a> (unzip it: the folder is named <code>gpt-image-26-main</code>), then open a terminal in the folder (Mac: Terminal app; Windows: PowerShell). On Windows, replace <code>python3</code> with <code>py</code>.</p><pre><span class="k">git clone</span> https://github.com/inematds/gpt-image-26
+<span class="k">cd</span> gpt-image-26
+<span class="k">python3 gerar.py</span> --help</pre></div>
+  </div>
+</div></section>
+
+<section id="guia"><div class="wrap">
+  <span class="chip">How-to guide · step by step</span>
+  <h2>From your first prompt to GIFs and logos</h2>
+  <p class="sub">Steps 1 to 6 work in ChatGPT. Step 7 does the same thing through the API. All prompts are in <a href="https://github.com/inematds/gpt-image-26/blob/main/prompts.md" target="_blank" rel="noopener">prompts.md</a> (in Portuguese).</p>
+
+  <div class="step"><div class="b">1</div><div>
+    <h3>Write the prompt in sections</h3>
+    <p>State the type of artwork and how you’ll use it, then describe the scene, subject, details, and restrictions. Put any required text in quotation marks, and say what you don’t want.</p>
+<pre>Create a portrait-format festival poster.
+Scene: beach at sunset, golden light.
+Details: bold typography, the same font throughout the poster.
+Restrictions: no logo, no watermark, no other text.
+Text (exactly): <span class="s">"SEA FESTIVAL 2027"</span></pre>
+  </div></div>
+
+  <div class="step"><div class="b">2</div><div>
+    <h3>Adjust complexity and quality, one at a time</h3>
+    <p>In ChatGPT, describe what you want in plain language (“plan the composition carefully,” “pay close attention to the small lettering”). In the API, use the <code>complexity</code> field (low, medium, high) and the <code>quality</code> field (auto, low, medium, high, xhigh, max; the script uses medium if you don’t specify one). Compare results using the same prompt and changing only one setting.</p>
+<pre><span class="c"># via the API (step 7, billed to your account): same prompt, only complexity changes (quality stays the same)</span>
+<span class="k">python3 gerar.py</span> <span class="s">"Four dancers form the word LIKE"</span> --complexity low  --quality medium --saida like-low
+<span class="k">python3 gerar.py</span> <span class="s">"Four dancers form the word LIKE"</span> --complexity high --quality medium --saida like-high</pre>
+  </div></div>
+
+  <div class="step"><div class="b">3</div><div>
+    <h3>Keep the same character</h3>
+    <p>Describe the features that must not change, and repeat them in each prompt. In ChatGPT, save the photo as a reference with a name, then refer to it by name later.</p>
+<pre>Save this image as a reference named <span class="s">"Ana"</span>.
+<span class="c"># in a new conversation:</span>
+Use the reference <span class="s">"Ana"</span> and create a video cover with the text <span class="s">"Start today"</span>.</pre>
+  </div></div>
+
+  <div class="step"><div class="b">4</div><div>
+    <h3>Create a looping GIF</h3>
+    <p>In ChatGPT, send the image and ask for a sprite sheet (a grid of animation frames): it will draw the frames and assemble the GIF. Give it a starting pose to return to for a smooth loop; ask for more frames to make the animation smoother.</p>
+<pre>Create a 3x3 sprite sheet of this person blinking and smiling, in a loop.
+The last frame returns to the first pose. Static camera. Then assemble the GIF.</pre>
+  </div></div>
+
+  <div class="step"><div class="b">5</div><div>
+    <h3>Ask for the logo in SVG</h3>
+    <p>SVG is vector graphics: you can move, recolor, and enlarge it from phone size to billboard size. Open it in Inkscape or Figma. SVG output is available only for new images (editing doesn’t return SVG).</p>
+<pre>Original logo for <span class="s">"North Star Bakery"</span>. Simple shapes, strong silhouette,
+few colors, no gradients. Transparent background. Deliver as SVG.</pre>
+  </div></div>
+
+  <div class="step"><div class="b">6</div><div>
+    <h3>Edit with markup: circle and prompt</h3>
+    <p>In ChatGPT, open the generated image and use the select/mark area tool that appears over it; through the API, use the <code>markup</code> field (step 7). Mark the area and describe the change. Then edit one thing at a time (color, background, lighting, angle), always saying what should stay the same.</p>
+<pre>Inside the red circle, paint the vase cobalt blue.
+Don’t change anything else in the image. Remove the circle from the result.</pre>
+  </div></div>
+
+  <div class="step"><div class="b">7</div><div>
+    <h3>Use the starter kit script with the API</h3>
+    <p><code>gerar.py</code> builds the request with the correct field names and checks the limits before spending (GIF frame count, dimensions in multiples of 16, SVG for generation only). Run with <code>--seco</code> to see the request without calling the API.</p>
+<pre><span class="k">python3 gerar.py</span> <span class="s">"Poster with the text SUMMER 2027"</span> --modelo sunburst --quality high --seco
+<span class="k">python3 gerar.py</span> <span class="s">"Bakery logo, simple shapes"</span> --formato svg --fundo transparente
+<span class="k">python3 gerar.py</span> <span class="s">"Cat blinks and returns to its starting pose, static camera"</span> --formato gif --quadros 9 --ms 200
+<span class="c"># markup with the example photo and circle from OpenAI</span>
+<span class="k">python3 exemplos/baixar.py</span>
+<span class="k">python3 gerar.py</span> <span class="s">"Paint the vase in the circle blue. Don’t change anything else. Remove the circle."</span> --editar exemplos/cozinha.webp --markup exemplos/circulo.png --complexity low</pre>
+    <p>For your own photo, create <code>circulo.png</code> in a layer editor (Photopea, Figma, GIMP): open the photo, create a new layer, draw the red circle, hide the photo layer, then export only the circle as a transparent-background PNG in the same size as the photo. Markup applies to the first image and can’t be combined with a mask. The photo can be PNG, JPG, or WebP.</p>
+  </div></div>
+</div></section>
+
+<section id="exemplos"><div class="wrap">
+  <span class="chip">Examples</span>
+  <h2>What each feature produces</h2>
+  <p class="sub">Official examples from OpenAI’s documentation, generated with 2.6.</p>
+  <div class="ex">
+    <figure class="wide"><img src="../assets/ex-complexidade.jpg" alt="Three versions of the same paper-cut football scene: low, medium, and high complexity" loading="lazy"><figcaption>Same prompt, same quality, complexity low → medium → high. At high complexity, the “CHAMPIONS” banner moves from in front of the team to the stands. Source: OpenAI.</figcaption></figure>
+    <figure><img src="../assets/ex-markup.jpg" alt="Kitchen photo with a red circle around a vase, and the vase painted blue beside it" loading="lazy"><figcaption>Markup: the circle shows where; the prompt says what. The vase turned blue, the rest of the kitchen stayed the same, and the circle disappeared. Source: OpenAI.</figcaption></figure>
+    <figure><img src="../assets/ex-gif.gif" alt="GIF of a monkey in a green coat raising a lantern in the snow" loading="lazy"><figcaption>Looping GIF: 9 frames of 200 ms (1.8 s). The monkey returns to its starting pose, so the loop doesn’t jump. Source: OpenAI.</figcaption></figure>
+    <figure><img src="../assets/ex-logo.svg" alt="Vector logo for a bakery with bread and wheat" loading="lazy" style="background:#f4efe6"><figcaption>SVG logo: a true vector with editable shapes. Source: OpenAI.</figcaption></figure>
+    <figure><img src="../assets/ex-traducao.jpg" alt="Coffee machine infographic and the same artwork translated into Spanish" loading="lazy"><figcaption>Bonus: translate infographic text while keeping the artwork unchanged. Check for words left in the original language. Source: OpenAI.</figcaption></figure>
+  </div>
+</div></section>
+
+<section id="limites"><div class="wrap">
+  <span class="chip">Limits and cost</span>
+  <h2>Where it still gets things wrong and what it costs</h2>
+  <p class="sub">It’s a real improvement in planning, text, crowds, GIFs, and vector graphics. Still, always check the result before using it. The four examples below come from hands-on tests with 2.6; OpenAI lists text, consistency, and exact positioning as general limitations.</p>
+  <div class="grid g4">
+    <div class="card"><h3>✋ Hands and wrists</h3><p>It can still generate too few fingers or a twisted wrist, even at high quality.</p></div>
+    <div class="card"><h3>📏 Proportions</h3><p>Objects can be the wrong scale: Jupiter is too small, or cards are different sizes.</p></div>
+    <div class="card"><h3>🪞 Reflections</h3><p>A mirror may show something it shouldn’t or leave out objects in the scene.</p></div>
+    <div class="card"><h3>🔢 Counting</h3><p>“Exactly seven” can turn into five. If the number matters, check it.</p></div>
+  </div>
+  <h3 style="margin:34px 0 8px;font-size:1.15rem">Pricing</h3>
+  <p class="mut" style="margin:0 0 10px">OpenAI charges by token, the unit it uses to measure what goes into and comes out of the model: a square image uses a few hundred to a few thousand tokens, depending on quality. Per token, 2.6 costs the same as 2.5 (output images at $30 per million). The difference is how many tokens it uses: at <b>low</b> and <b>medium</b> quality, 2.6 uses more; from <b>high</b> upward, it uses the same amount.</p>
+  <div class="bars" role="img" aria-label="Cost per 1024x1024 image in the official calculator: low 2.5 = 0.6 cents, 2.6 = 2.5 cents; medium 2.5 = 1.3, 2.6 = 4.4; high 5.3 for both; max 21.1 for both">
+    <div class="bar"><span>low · 2.5</span><div class="tr"><div class="fi" style="width:3%"></div></div><span class="v">0.6¢</span></div>
+    <div class="bar"><span>low · 2.6</span><div class="tr"><div class="fi" style="width:12%"></div></div><span class="v">2.5¢</span></div>
+    <div class="bar"><span>medium · 2.5</span><div class="tr"><div class="fi" style="width:6%"></div></div><span class="v">1.3¢</span></div>
+    <div class="bar"><span>medium · 2.6</span><div class="tr"><div class="fi" style="width:21%"></div></div><span class="v">4.4¢</span></div>
+    <div class="bar"><span>high · both</span><div class="tr"><div class="fi" style="width:25%"></div></div><span class="v">5.3¢</span></div>
+    <div class="bar"><span>xhigh · both</span><div class="tr"><div class="fi" style="width:44%"></div></div><span class="v">9.4¢</span></div>
+    <div class="bar"><span>max · both</span><div class="tr"><div class="fi" style="width:100%"></div></div><span class="v">21.1¢</span></div>
+  </div>
+  <p class="mut" style="font-size:.85rem;margin:4px 0 18px">Output cost for one 1024×1024 image, in US cents, according to <a href="https://developers.openai.com/api/docs/guides/image-generation#calculating-costs" target="_blank" rel="noopener">OpenAI’s official calculator</a> (checked on 07/11/2026). At low quality, 2.6 costs 4.2× more than 2.5; at medium, 3.3× more; from high upward, the same. The prompt text and input images add a little more.</p>
+  <div class="warn">Budget-friendly approach: make drafts with <b>Flare</b> at <b>low</b> or <b>medium</b> quality; use <b>Sunburst</b> at <b>high</b> quality only for the final piece. Complexity and markup have no extra charge; SVG is billed for the reference image plus the vector tokens.</div>
+  <p class="mut" style="font-size:.85rem">Sources: <a href="https://developers.openai.com/api/docs/guides/image-prompting?model=gpt-image-2.6" target="_blank" rel="noopener">GPT Image 2.6 prompting guide</a>, <a href="https://developers.openai.com/api/docs/guides/image-generation" target="_blank" rel="noopener">image generation guide</a>, and <a href="https://developers.openai.com/api/docs/pricing" target="_blank" rel="noopener">pricing</a> (OpenAI, checked on 07/11/2026).</p>
+</div></section>
+
+<footer>
+  <div class="wrap">
+    <div class="pill">GPT Image 2.6</div><div class="pill">ChatGPT</div><div class="pill">Python</div>
+    <p style="margin-top:18px">GPT Image 2.6 in practice · guide and prompt kit ·
+      <a href="https://github.com/inematds/gpt-image-26">inematds/gpt-image-26</a> ·
+      <a href="https://inema.club">INEMA.CLUB</a></p>
+  </div>
+</footer>
+
+<script>
+  (function(){
+    var KEY='gpt-image-26-theme';
+    var b=document.body, t=document.getElementById('themeToggle');
+    try{ if(localStorage.getItem(KEY)==='light'){ b.classList.add('light'); t.textContent='☀️'; } }catch(e){}
+    t.addEventListener('click',function(){
+      var light=b.classList.toggle('light');
+      t.textContent=light?'☀️':'🌙';
+      try{ localStorage.setItem(KEY, light?'light':'dark'); }catch(e){}
+    });
+  })();
+</script>
+</body>
+</html>
