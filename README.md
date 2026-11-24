@@ -1,4 +1,4 @@
-﻿# GPT Image 2.6 na prÃ¡tica
+# GPT Image 2.6 na prÃ¡tica
 
 <div align="center">
   <img src="capa/logo.svg" alt="Arckhé AI" height="48" />
@@ -6,7 +6,7 @@
 </div>
 
 
-[![GPT Image 2.6 na prÃ¡tica](guia/assets/banner.jpg)](https://inematds.github.io/gpt-image-26/guia/)
+[![GPT Image 2.6 na prÃ¡tica](guia/assets/banner.jpg)](https://linnoff88-dev.github.io/
 
 **ðŸ‡§ðŸ‡· [PortuguÃªs](README.md) Â· ðŸ‡ºðŸ‡¸ [English](README.en.md) Â· ðŸ‡ªðŸ‡¸ [EspaÃ±ol](README.es.md)**
 
@@ -16,7 +16,7 @@ O GPT Image 2.6 Ã© o modelo de imagem mais novo da OpenAI, que jÃ¡ roda dent
 
 ## ðŸ“– Guia de uso
 
-Guia completo (landing + passo a passo): **https://inematds.github.io/gpt-image-26/guia/**
+Guia completo (landing + passo a passo): **https://linnoff88-dev.github.io/
 
 ðŸŽ¬ VÃ­deo: https://www.youtube.com/watch?v=bHTe58nwW3s
 
@@ -56,7 +56,7 @@ python3 gerar.py "Pinte de azul o vaso no cÃ­rculo. NÃ£o mude mais nada. Tir
 
 A chave da API Ã© criada em https://platform.openai.com/api-keys e cobrada Ã  parte da assinatura do ChatGPT.
 
-No Windows, use `py` no lugar de `python3`. Sem Git, baixe o [ZIP](https://github.com/inematds/gpt-image-26/archive/refs/heads/main.zip).
+No Windows, use `py` no lugar de `python3`. Sem Git, baixe o [ZIP](https://github.com/linnoff88-dev/gpt-image-26/archive/refs/heads/main.zip).
 
 `python3 gerar.py --help` lista todas as opÃ§Ãµes e os padrÃµes (modelo `flare`, qualidade `medium`). Cada pedido real Ã© cobrado na sua conta da OpenAI.
 
@@ -80,7 +80,7 @@ As imagens de exemplo do guia sÃ£o da documentaÃ§Ã£o da OpenAI.
 
 ---
 
-Feito pelo [INEMA.CLUB](https://inema.club).
+Feito pelo [ARCKHÉ AI](https://ARCKHÉ AI).
 
 ---
 

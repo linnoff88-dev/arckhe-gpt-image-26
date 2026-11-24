@@ -1,6 +1,6 @@
 # GPT Image 2.6 in practice
 
-[![GPT Image 2.6 in practice](guia/assets/banner-en.jpg)](https://inematds.github.io/gpt-image-26/guia/en/)
+[![GPT Image 2.6 in practice](guia/assets/banner-en.jpg)](https://linnoff88-dev.github.io/
 
 **🇧🇷 [Português](README.md) · 🇺🇸 [English](README.en.md) · 🇪🇸 [Español](README.es.md)**
 
@@ -10,7 +10,7 @@ GPT Image 2.6 is OpenAI’s newest image model, already running inside ChatGPT a
 
 ## 📖 User guide
 
-Complete guide (landing page + step-by-step): **https://inematds.github.io/gpt-image-26/guia/en/**
+Complete guide (landing page + step-by-step): **https://linnoff88-dev.github.io/
 
 🎬 Video: https://www.youtube.com/watch?v=bHTe58nwW3s
 
@@ -50,7 +50,7 @@ python3 gerar.py "Paint the vase in the circle blue. Don’t change anything els
 
 Create your API key at https://platform.openai.com/api-keys. It is billed separately from your ChatGPT subscription.
 
-On Windows, use `py` instead of `python3`. Without Git, download the [ZIP](https://github.com/inematds/gpt-image-26/archive/refs/heads/main.zip).
+On Windows, use `py` instead of `python3`. Without Git, download the [ZIP](https://github.com/linnoff88-dev/gpt-image-26/archive/refs/heads/main.zip).
 
 `python3 gerar.py --help` lists all options and defaults (model `flare`, quality `medium`). Each actual request is billed to your OpenAI account.
 
@@ -74,4 +74,4 @@ The example images in the guide are from OpenAI documentation.
 
 ---
 
-Made by [INEMA.CLUB](https://inema.club).
+Made by [ARCKHÉ AI](https://ARCKHÉ AI).

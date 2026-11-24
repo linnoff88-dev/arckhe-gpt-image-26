@@ -5,9 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>GPT Image 2.6 in practice — how to use OpenAI’s new image model</title>
 <meta name="description" content="A practical guide to GPT Image 2.6: Flare or Sunburst, complexity × quality, GIFs, SVGs, markup editing, saved references in ChatGPT, cost, and where it still gets things wrong. Includes ready-to-use prompts and a script.">
-<link rel="alternate" hreflang="pt-BR" href="https://inematds.github.io/gpt-image-26/guia/">
-<link rel="alternate" hreflang="en" href="https://inematds.github.io/gpt-image-26/guia/en/">
-<link rel="alternate" hreflang="es" href="https://inematds.github.io/gpt-image-26/guia/es/">
+<link rel="alternate" hreflang="pt-BR" href="https://linnoff88-dev.github.io/
+<link rel="alternate" hreflang="en" href="https://linnoff88-dev.github.io/
+<link rel="alternate" hreflang="es" href="https://linnoff88-dev.github.io/
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
@@ -39,8 +39,8 @@
   nav .brand{display:flex;align-items:center;gap:8px;font-family:Sora;font-weight:800;letter-spacing:-.02em;color:var(--amb)}
   nav .brand .emoji{font-size:1.25rem}
   nav .sep{color:var(--mut);opacity:.45}
-  nav .inema{color:var(--sky);font-weight:600;font-size:.88rem;font-family:Sora}
-  nav .inema:hover{filter:brightness(1.15)}
+  nav .ARCKHÉ{color:var(--sky);font-weight:600;font-size:.88rem;font-family:Sora}
+  nav .ARCKHÉ:hover{filter:brightness(1.15)}
   nav .pro{color:var(--pro);font-weight:600;font-size:.88rem;font-family:Sora}
   nav .pro:hover{filter:brightness(1.15)}
   nav .clubpro{display:inline-flex;align-items:center;gap:6px}
@@ -122,9 +122,9 @@
   <a class="brand" href="#top"><span class="emoji">🎨</span> GPT Image 2.6</a>
   <span class="sep">|</span>
   <span class="clubpro">
-    <a class="inema" href="https://inema.club" target="_blank" rel="noopener">INEMA.CLUB</a>
+    <a class="ARCKHÉ" href="https://ARCKHÉ AI" target="_blank" rel="noopener">ARCKHÉ AI</a>
     <span class="sep">-</span>
-    <a class="pro" href="https://inema.pro" target="_blank" rel="noopener">PRO</a>
+    <a class="pro" href="https://ARCKHÉ.pro" target="_blank" rel="noopener">PRO</a>
   </span>
   <div class="links">
     <a class="sec" href="#oque">What it is</a>
@@ -134,7 +134,7 @@
     <a class="sec" href="#limites">Limits and cost</a>
     <span class="lang"><a href="../">PT</a><a class="on" href="./">EN</a><a href="../es/">ES</a></span>
     <button class="tgl" id="themeToggle" aria-label="Toggle theme" title="Toggle theme">🌙</button>
-    <a class="btn" href="https://github.com/inematds/gpt-image-26" target="_blank" rel="noopener">GitHub</a>
+    <a class="btn" href="https://github.com/linnoff88-dev/gpt-image-26" target="_blank" rel="noopener">GitHub</a>
   </div>
 </div></nav>
 
@@ -147,7 +147,7 @@
       <p class="lead">What’s new in OpenAI’s image model, which settings to use for each task, what it costs, and where it still gets things wrong.</p>
       <div class="cta">
         <a class="btn" href="#guia">Start the guide</a>
-        <a class="btn ghost" href="https://github.com/inematds/gpt-image-26" target="_blank" rel="noopener">View on GitHub</a>
+        <a class="btn ghost" href="https://github.com/linnoff88-dev/gpt-image-26" target="_blank" rel="noopener">View on GitHub</a>
       </div>
     </div>
     <figure><img src="../assets/banner-en.jpg" alt="Banner: GPT Image 2.6 in practice"></figure>
@@ -215,7 +215,7 @@
 <span class="k">export</span> OPENAI_API_KEY=<span class="s">"sua-chave"</span>
 <span class="c"># Windows (PowerShell)</span>
 <span class="k">$env:</span>OPENAI_API_KEY=<span class="s">"sua-chave"</span></pre></div>
-    <div class="card"><h3>🐍 Starter kit script</h3><p>Python 3.9 or newer (<a href="https://www.python.org/downloads/" target="_blank" rel="noopener">python.org</a>); no package installation needed. Download the kit with <a href="https://git-scm.com/downloads" target="_blank" rel="noopener">Git</a> or as a <a href="https://github.com/inematds/gpt-image-26/archive/refs/heads/main.zip">ZIP</a> (unzip it: the folder is named <code>gpt-image-26-main</code>), then open a terminal in the folder (Mac: Terminal app; Windows: PowerShell). On Windows, replace <code>python3</code> with <code>py</code>.</p><pre><span class="k">git clone</span> https://github.com/inematds/gpt-image-26
+    <div class="card"><h3>🐍 Starter kit script</h3><p>Python 3.9 or newer (<a href="https://www.python.org/downloads/" target="_blank" rel="noopener">python.org</a>); no package installation needed. Download the kit with <a href="https://git-scm.com/downloads" target="_blank" rel="noopener">Git</a> or as a <a href="https://github.com/linnoff88-dev/gpt-image-26/archive/refs/heads/main.zip">ZIP</a> (unzip it: the folder is named <code>gpt-image-26-main</code>), then open a terminal in the folder (Mac: Terminal app; Windows: PowerShell). On Windows, replace <code>python3</code> with <code>py</code>.</p><pre><span class="k">git clone</span> https://github.com/linnoff88-dev/gpt-image-26
 <span class="k">cd</span> gpt-image-26
 <span class="k">python3 gerar.py</span> --help</pre></div>
   </div>
@@ -224,7 +224,7 @@
 <section id="guia"><div class="wrap">
   <span class="chip">How-to guide · step by step</span>
   <h2>From your first prompt to GIFs and logos</h2>
-  <p class="sub">Steps 1 to 6 work in ChatGPT. Step 7 does the same thing through the API. All prompts are in <a href="https://github.com/inematds/gpt-image-26/blob/main/prompts.md" target="_blank" rel="noopener">prompts.md</a> (in Portuguese).</p>
+  <p class="sub">Steps 1 to 6 work in ChatGPT. Step 7 does the same thing through the API. All prompts are in <a href="https://github.com/linnoff88-dev/gpt-image-26/blob/main/prompts.md" target="_blank" rel="noopener">prompts.md</a> (in Portuguese).</p>
 
   <div class="step"><div class="b">1</div><div>
     <h3>Write the prompt in sections</h3>
@@ -329,8 +329,8 @@ Don’t change anything else in the image. Remove the circle from the result.</p
   <div class="wrap">
     <div class="pill">GPT Image 2.6</div><div class="pill">ChatGPT</div><div class="pill">Python</div>
     <p style="margin-top:18px">GPT Image 2.6 in practice · guide and prompt kit ·
-      <a href="https://github.com/inematds/gpt-image-26">inematds/gpt-image-26</a> ·
-      <a href="https://inema.club">INEMA.CLUB</a></p>
+      <a href="https://github.com/linnoff88-dev/gpt-image-26">linnoff88-dev/gpt-image-26</a> ·
+      <a href="https://ARCKHÉ AI">ARCKHÉ AI</a></p>
   </div>
 </footer>
 
