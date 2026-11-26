@@ -45,7 +45,7 @@ python3 gerar.py "Cartel con el texto VERANO 2027" --modelo sunburst --quality h
 python3 gerar.py "Logo de padaria, formas simples" --formato svg --fundo transparente
 python3 gerar.py "Gato pisca e volta à pose inicial, câmera parada" --formato gif --quadros 9 --ms 200
 python3 exemplos/baixar.py
-python3 gerar.py "Pinte de azul o vaso no círculo. Não mude mais nada. Tire o círculo." --editar exemplos/cozinha.webp --markup exemplos/circulo.png --complexity low
+python3 gerar.py "Pinte de azul o vaso no círculo. Nêo mude mais nada. Tire o círculo." --editar exemplos/cozinha.webp --markup exemplos/circulo.png --complexity low
 ```
 
 La clave de la API se crea en https://platform.openai.com/api-keys y se cobra por separado de la suscripción de ChatGPT.

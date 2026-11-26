@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>GPT Image 2.6 na prática — como usar o novo modelo de imagem da OpenAI</title>
-<meta name="description" content="Guia em português do GPT Image 2.6: Flare ou Sunburst, complexity × quality, GIF, SVG, edição com markup, referência salva no ChatGPT, custo e onde ainda erra. Com prompts prontos e script.">
+<meta name="description" content="Guia em português do GPT Image 2.6: Flare ou Sunburst, complexity × quality, GIF, SVG, ediçêo com markup, referência salva no ChatGPT, custo e onde ainda erra. Com prompts prontos e script.">
 <link rel="alternate" hreflang="pt-BR" href="https://linnoff88-dev.github.io/
 <link rel="alternate" hreflang="en" href="https://linnoff88-dev.github.io/
 <link rel="alternate" hreflang="es" href="https://linnoff88-dev.github.io/
@@ -156,7 +156,7 @@
 
 <section id="resumo" class="resumo"><div class="wrap">
   <span class="chip">Em resumo</span>
-  <p>O GPT Image 2.6 é o modelo de imagem mais novo da OpenAI, que já roda dentro do ChatGPT e do Codex (o assistente de programação da OpenAI) e também pode ser usado pela API, a porta de acesso para programas e scripts. Este guia é para quem cria imagens para posts, anúncios, logos, histórias ou vídeos e quer tirar proveito das novidades: o ajuste de complexidade (quanto o modelo planeja antes de desenhar), GIF animado, logo em vetor (SVG) e edição só na área que você marca. Para usar basta uma conta do ChatGPT; para a API, uma chave da OpenAI (cobrada à parte da assinatura) e o script <code>gerar.py</code> deste repositório, que só precisa do Python.</p>
+  <p>O GPT Image 2.6 é o modelo de imagem mais novo da OpenAI, que já roda dentro do ChatGPT e do Codex (o assistente de programaçêo da OpenAI) e também pode ser usado pela API, a porta de acesso para programas e scripts. Este guia é para quem cria imagens para posts, anúncios, logos, histórias ou vídeos e quer tirar proveito das novidades: o ajuste de complexidade (quanto o modelo planeja antes de desenhar), GIF animado, logo em vetor (SVG) e ediçêo só na área que você marca. Para usar basta uma conta do ChatGPT; para a API, uma chave da OpenAI (cobrada à parte da assinatura) e o script <code>gerar.py</code> deste repositório, que só precisa do Python.</p>
 </div></section>
 
 <section id="video"><div class="wrap">
@@ -170,17 +170,17 @@
 <section id="oque"><div class="wrap">
   <span class="chip">O que é</span>
   <h2>Um modelo que planeja antes de desenhar</h2>
-  <p class="sub">São dois modelos na API, os mesmos recursos nos dois. No ChatGPT você não escolhe: o 2.6 já está lá.</p>
+  <p class="sub">Sêo dois modelos na API, os mesmos recursos nos dois. No ChatGPT você nêo escolhe: o 2.6 já está lá.</p>
   <figure style="margin:0 0 26px;border-radius:16px;overflow:hidden;border:1px solid var(--line);box-shadow:0 30px 80px -30px #000"><img src="assets/banner-grade.jpg" alt="Banner: Flare ou Sunburst, complexidade, qualidade, GIF em loop, logo em SVG e markup" loading="lazy" style="width:100%;display:block"></figure>
   <div class="grid g3">
-    <div class="card"><h3>🧠 Complexidade</h3><p>Novo ajuste <code>complexity</code> (low, medium, high): quanto o modelo planeja posição dos objetos, interação das pessoas e várias instruções juntas. Padrão: high. Não tem cobrança separada.</p></div>
+    <div class="card"><h3>🧠 Complexidade</h3><p>Novo ajuste <code>complexity</code> (low, medium, high): quanto o modelo planeja posiçêo dos objetos, interaçêo das pessoas e várias instruções juntas. Padrêo: high. Nêo tem cobrança separada.</p></div>
     <div class="card"><h3>🎞️ GIF e SVG</h3><p>Sai GIF animado em loop (2 a 16 quadros) e logo em vetor SVG, que você abre num editor e amplia sem perder qualidade.</p></div>
-    <div class="card"><h3>⭕ Edição com markup</h3><p>Você circula na imagem onde quer a mudança, escreve o que quer, e ele mexe só ali. A edição comum também ficou mais fiel: o resto fica no lugar.</p></div>
+    <div class="card"><h3>⭕ Ediçêo com markup</h3><p>Você circula na imagem onde quer a mudança, escreve o que quer, e ele mexe só ali. A ediçêo comum também ficou mais fiel: o resto fica no lugar.</p></div>
   </div>
   <div class="tw"><table class="t">
     <tr><th>Modelo</th><th>Para quê</th><th>Quando usar</th></tr>
     <tr><td><code>gpt-image-2.6-flare</code></td><td>Menor e mais rápido</td><td class="m">Rascunho, post rápido, muitas variações, quando o tempo de resposta manda.</td></tr>
-    <tr><td><code>gpt-image-2.6-sunburst</code></td><td>Modelo base, mais detalhe</td><td class="m">Peça final, anúncio, edição precisa, texto pequeno, layout exigente.</td></tr>
+    <tr><td><code>gpt-image-2.6-sunburst</code></td><td>Modelo base, mais detalhe</td><td class="m">Peça final, anúncio, ediçêo precisa, texto pequeno, layout exigente.</td></tr>
   </table></div>
 </div></section>
 
@@ -193,14 +193,14 @@
     <span>Prompt em seções</span><span class="arr">→</span>
     <span>Layout certo? (complexity)</span><span class="arr">→</span>
     <span>Detalhe certo? (quality)</span><span class="arr">→</span>
-    <span>Confira mão, texto, reflexo</span><span class="arr">→</span>
+    <span>Confira mêo, texto, reflexo</span><span class="arr">→</span>
     <span>Edite uma coisa por vez</span>
   </div>
   <div class="tw" style="margin-top:26px"><table class="t">
     <tr><th>O que deu errado</th><th>O que mexer</th></tr>
     <tr><td>Objeto no lugar errado, palavra formada errada, pessoas sem sentido</td><td class="m">Suba a <b>complexity</b> (mantendo a quality igual).</td></tr>
     <tr><td>Layout certo, mas letra pequena ilegível ou textura pobre</td><td class="m">Suba a <b>quality</b> (mantendo a complexity igual).</td></tr>
-    <tr><td>Edição pequena mexeu em outras partes</td><td class="m">Use <b>complexity low</b> e liste o que deve ficar igual.</td></tr>
+    <tr><td>Ediçêo pequena mexeu em outras partes</td><td class="m">Use <b>complexity low</b> e liste o que deve ficar igual.</td></tr>
     <tr><td>Demora demais</td><td class="m">Troque para o <b>Flare</b> ou baixe a quality; <code>xhigh</code> e <code>max</code> só se resolverem algo.</td></tr>
   </table></div>
 </div></section>
@@ -211,11 +211,11 @@
   <p class="sub">Para a maioria das pessoas, só o ChatGPT. A API é para quem quer automatizar.</p>
   <div class="grid g3">
     <div class="card"><h3>💬 ChatGPT</h3><p>Conta do ChatGPT (navegador, computador ou celular). O 2.6 também chegou ao Codex. Basta pedir a imagem na conversa.</p></div>
-    <div class="card"><h3>🔑 API (opcional)</h3><p>Crie a chave em <a href="https://platform.openai.com/api-keys" target="_blank" rel="noopener">platform.openai.com/api-keys</a> e ponha crédito na conta da API: ela é cobrada à parte, a assinatura do ChatGPT não cobre.</p><pre><span class="c"># Mac e Linux</span>
+    <div class="card"><h3>🔑 API (opcional)</h3><p>Crie a chave em <a href="https://platform.openai.com/api-keys" target="_blank" rel="noopener">platform.openai.com/api-keys</a> e ponha crédito na conta da API: ela é cobrada à parte, a assinatura do ChatGPT nêo cobre.</p><pre><span class="c"># Mac e Linux</span>
 <span class="k">export</span> OPENAI_API_KEY=<span class="s">"sua-chave"</span>
 <span class="c"># Windows (PowerShell)</span>
 <span class="k">$env:</span>OPENAI_API_KEY=<span class="s">"sua-chave"</span></pre></div>
-    <div class="card"><h3>🐍 Script do kit</h3><p>Python 3.9 ou mais novo (<a href="https://www.python.org/downloads/" target="_blank" rel="noopener">python.org</a>); não precisa instalar pacote. Baixe o kit com o <a href="https://git-scm.com/downloads" target="_blank" rel="noopener">Git</a> ou pelo <a href="https://github.com/linnoff88-dev/gpt-image-26/archive/refs/heads/main.zip">ZIP</a> (descompacte: a pasta se chama <code>gpt-image-26-main</code>) e abra o terminal na pasta (Mac: app Terminal; Windows: PowerShell). No Windows, troque <code>python3</code> por <code>py</code>.</p><pre><span class="k">git clone</span> https://github.com/linnoff88-dev/gpt-image-26
+    <div class="card"><h3>🐍 Script do kit</h3><p>Python 3.9 ou mais novo (<a href="https://www.python.org/downloads/" target="_blank" rel="noopener">python.org</a>); nêo precisa instalar pacote. Baixe o kit com o <a href="https://git-scm.com/downloads" target="_blank" rel="noopener">Git</a> ou pelo <a href="https://github.com/linnoff88-dev/gpt-image-26/archive/refs/heads/main.zip">ZIP</a> (descompacte: a pasta se chama <code>gpt-image-26-main</code>) e abra o terminal na pasta (Mac: app Terminal; Windows: PowerShell). No Windows, troque <code>python3</code> por <code>py</code>.</p><pre><span class="k">git clone</span> https://github.com/linnoff88-dev/gpt-image-26
 <span class="k">cd</span> gpt-image-26
 <span class="k">python3 gerar.py</span> --help</pre></div>
   </div>
@@ -224,11 +224,11 @@
 <section id="guia"><div class="wrap">
   <span class="chip">Guia de uso · passo a passo</span>
   <h2>Do primeiro pedido ao GIF e ao logo</h2>
-  <p class="sub">Os passos 1 a 6 funcionam no ChatGPT. O passo 7 é a mesma coisa pela API. Todos os prompts estão no arquivo <a href="https://github.com/linnoff88-dev/gpt-image-26/blob/main/prompts.md" target="_blank" rel="noopener">prompts.md</a>.</p>
+  <p class="sub">Os passos 1 a 6 funcionam no ChatGPT. O passo 7 é a mesma coisa pela API. Todos os prompts estêo no arquivo <a href="https://github.com/linnoff88-dev/gpt-image-26/blob/main/prompts.md" target="_blank" rel="noopener">prompts.md</a>.</p>
 
   <div class="step"><div class="b">1</div><div>
     <h3>Escreva o pedido em seções</h3>
-    <p>Diga o tipo de peça e o uso, depois cena, sujeito, detalhes e restrições. Texto que precisa aparecer vai entre aspas, e diga o que não quer.</p>
+    <p>Diga o tipo de peça e o uso, depois cena, sujeito, detalhes e restrições. Texto que precisa aparecer vai entre aspas, e diga o que nêo quer.</p>
 <pre>Crie um cartaz de festival, formato retrato.
 Cena: praia ao entardecer, luz dourada.
 Detalhes: tipografia forte, a mesma fonte no cartaz inteiro.
@@ -238,7 +238,7 @@ Texto (exatamente): <span class="s">"FESTIVAL DO MAR 2027"</span></pre>
 
   <div class="step"><div class="b">2</div><div>
     <h3>Ajuste complexidade e qualidade, um de cada vez</h3>
-    <p>No ChatGPT, peça em palavras ("planeje bem a composição", "capriche no detalhe da letra pequena"). Na API, são os campos <code>complexity</code> (low, medium, high) e <code>quality</code> (auto, low, medium, high, xhigh, max; o script usa medium se você não disser). Compare com o mesmo prompt mudando só um deles.</p>
+    <p>No ChatGPT, peça em palavras ("planeje bem a composiçêo", "capriche no detalhe da letra pequena"). Na API, sêo os campos <code>complexity</code> (low, medium, high) e <code>quality</code> (auto, low, medium, high, xhigh, max; o script usa medium se você nêo disser). Compare com o mesmo prompt mudando só um deles.</p>
 <pre><span class="c"># pela API (passo 7, cobra na sua conta): mesmo prompt, só a complexidade muda (qualidade fixa)</span>
 <span class="k">python3 gerar.py</span> <span class="s">"Quatro dançarinos formam a palavra LIKE"</span> --complexity low  --quality medium --saida like-low
 <span class="k">python3 gerar.py</span> <span class="s">"Quatro dançarinos formam a palavra LIKE"</span> --complexity high --quality medium --saida like-high</pre>
@@ -246,7 +246,7 @@ Texto (exatamente): <span class="s">"FESTIVAL DO MAR 2027"</span></pre>
 
   <div class="step"><div class="b">3</div><div>
     <h3>Mantenha o mesmo personagem</h3>
-    <p>Descreva os traços que não podem mudar e repita em cada pedido. No ChatGPT, salve a foto como referência com um nome e chame pelo nome depois.</p>
+    <p>Descreva os traços que nêo podem mudar e repita em cada pedido. No ChatGPT, salve a foto como referência com um nome e chame pelo nome depois.</p>
 <pre>Salve esta imagem como referência com o nome <span class="s">"Ana"</span>.
 <span class="c"># numa conversa nova:</span>
 Use a referência <span class="s">"Ana"</span> e crie a capa de um vídeo com o texto <span class="s">"Comece hoje"</span>.</pre>
@@ -254,14 +254,14 @@ Use a referência <span class="s">"Ana"</span> e crie a capa de um vídeo com o 
 
   <div class="step"><div class="b">4</div><div>
     <h3>Faça um GIF em loop</h3>
-    <p>No ChatGPT, mande a imagem e peça um sprite sheet (uma grade com os quadros da animação): ele desenha os quadros e monta o GIF. Dê uma pose inicial para voltar, que o loop fica liso; peça mais quadros para ficar mais suave.</p>
+    <p>No ChatGPT, mande a imagem e peça um sprite sheet (uma grade com os quadros da animaçêo): ele desenha os quadros e monta o GIF. Dê uma pose inicial para voltar, que o loop fica liso; peça mais quadros para ficar mais suave.</p>
 <pre>Faça um sprite sheet 3x3 desta pessoa piscando e sorrindo, em loop.
 O último quadro volta para a pose do primeiro. Câmera parada. Depois monte o GIF.</pre>
   </div></div>
 
   <div class="step"><div class="b">5</div><div>
     <h3>Peça o logo em SVG</h3>
-    <p>SVG é vetor: dá para mover, recolorir e ampliar do celular a um outdoor. Abra no Inkscape ou no Figma. O SVG sai só em imagem nova (a edição não devolve SVG).</p>
+    <p>SVG é vetor: dá para mover, recolorir e ampliar do celular a um outdoor. Abra no Inkscape ou no Figma. O SVG sai só em imagem nova (a ediçêo nêo devolve SVG).</p>
 <pre>Logo original para <span class="s">"Padaria Trigo &amp; Forno"</span>. Formas simples, silhueta forte,
 poucas cores, sem degradê. Fundo transparente. Entregue em SVG.</pre>
   </div></div>
@@ -270,31 +270,31 @@ poucas cores, sem degradê. Fundo transparente. Entregue em SVG.</pre>
     <h3>Edite com markup: circule e peça</h3>
     <p>No ChatGPT, abra a imagem gerada e use a ferramenta de selecionar/marcar área que aparece sobre ela; pela API, é o campo <code>markup</code> (passo 7). Marque a área e diga a mudança. Depois edite uma coisa por vez (cor, fundo, luz, ângulo), sempre dizendo o que deve ficar igual.</p>
 <pre>Dentro do círculo vermelho, pinte o vaso de azul-cobalto.
-Não mude mais nada na imagem. Remova o círculo do resultado.</pre>
+Nêo mude mais nada na imagem. Remova o círculo do resultado.</pre>
   </div></div>
 
   <div class="step"><div class="b">7</div><div>
     <h3>Pela API, com o script do kit</h3>
-    <p>O <code>gerar.py</code> monta o pedido com os nomes certos dos campos e confere os limites antes de gastar (quadros do GIF, tamanho em múltiplos de 16, SVG só em geração). Rode com <code>--seco</code> para ver o pedido sem chamar a API.</p>
-<pre><span class="k">python3 gerar.py</span> <span class="s">"Cartaz com o texto VERÃO 2027"</span> --modelo sunburst --quality high --seco
+    <p>O <code>gerar.py</code> monta o pedido com os nomes certos dos campos e confere os limites antes de gastar (quadros do GIF, tamanho em múltiplos de 16, SVG só em geraçêo). Rode com <code>--seco</code> para ver o pedido sem chamar a API.</p>
+<pre><span class="k">python3 gerar.py</span> <span class="s">"Cartaz com o texto VERêO 2027"</span> --modelo sunburst --quality high --seco
 <span class="k">python3 gerar.py</span> <span class="s">"Logo de padaria, formas simples"</span> --formato svg --fundo transparente
 <span class="k">python3 gerar.py</span> <span class="s">"Gato pisca e volta à pose inicial, câmera parada"</span> --formato gif --quadros 9 --ms 200
 <span class="c"># markup com a foto e o círculo de exemplo da OpenAI</span>
 <span class="k">python3 exemplos/baixar.py</span>
-<span class="k">python3 gerar.py</span> <span class="s">"Pinte de azul o vaso no círculo. Não mude mais nada. Tire o círculo."</span> --editar exemplos/cozinha.webp --markup exemplos/circulo.png --complexity low</pre>
-    <p>Para a sua foto, faça o <code>circulo.png</code> num editor de camadas (Photopea, Figma, GIMP): abra a foto, crie uma camada nova, desenhe o círculo vermelho, esconda a camada da foto e exporte só o círculo em PNG com fundo transparente, no mesmo tamanho da foto. O markup vale para a primeira imagem e não se combina com máscara. A foto pode ser PNG, JPG ou WebP.</p>
+<span class="k">python3 gerar.py</span> <span class="s">"Pinte de azul o vaso no círculo. Nêo mude mais nada. Tire o círculo."</span> --editar exemplos/cozinha.webp --markup exemplos/circulo.png --complexity low</pre>
+    <p>Para a sua foto, faça o <code>circulo.png</code> num editor de camadas (Photopea, Figma, GIMP): abra a foto, crie uma camada nova, desenhe o círculo vermelho, esconda a camada da foto e exporte só o círculo em PNG com fundo transparente, no mesmo tamanho da foto. O markup vale para a primeira imagem e nêo se combina com máscara. A foto pode ser PNG, JPG ou WebP.</p>
   </div></div>
 </div></section>
 
 <section id="exemplos"><div class="wrap">
   <span class="chip">Exemplos</span>
   <h2>O que cada recurso entrega</h2>
-  <p class="sub">Exemplos oficiais da documentação da OpenAI, gerados com o 2.6.</p>
+  <p class="sub">Exemplos oficiais da documentaçêo da OpenAI, gerados com o 2.6.</p>
   <div class="ex">
     <figure class="wide"><img src="assets/ex-complexidade.jpg" alt="Três versões da mesma cena de futebol em papel recortado: complexidade baixa, média e alta" loading="lazy"><figcaption>Mesmo prompt, qualidade igual, complexidade low → medium → high. No high, a faixa "CHAMPIONS" sai da frente do time e vai para a arquibancada. Fonte: OpenAI.</figcaption></figure>
-    <figure><img src="assets/ex-markup.jpg" alt="Foto de cozinha com um círculo vermelho no vaso e, ao lado, o vaso pintado de azul" loading="lazy"><figcaption>Markup: o círculo diz onde; o prompt diz o quê. O vaso ficou azul, o resto da cozinha não mudou e o círculo sumiu. Fonte: OpenAI.</figcaption></figure>
-    <figure><img src="assets/ex-gif.gif" alt="GIF de um macaco de casaco verde levantando uma lanterna na neve" loading="lazy"><figcaption>GIF em loop: 9 quadros de 200 ms (1,8 s). O macaco volta à pose inicial, por isso o loop não pula. Fonte: OpenAI.</figcaption></figure>
-    <figure><img src="assets/ex-logo.svg" alt="Logo vetorial de uma padaria com pão e trigo" loading="lazy" style="background:#f4efe6"><figcaption>Logo em SVG: vetor de verdade, com formas editáveis. Fonte: OpenAI.</figcaption></figure>
+    <figure><img src="assets/ex-markup.jpg" alt="Foto de cozinha com um círculo vermelho no vaso e, ao lado, o vaso pintado de azul" loading="lazy"><figcaption>Markup: o círculo diz onde; o prompt diz o quê. O vaso ficou azul, o resto da cozinha nêo mudou e o círculo sumiu. Fonte: OpenAI.</figcaption></figure>
+    <figure><img src="assets/ex-gif.gif" alt="GIF de um macaco de casaco verde levantando uma lanterna na neve" loading="lazy"><figcaption>GIF em loop: 9 quadros de 200 ms (1,8 s). O macaco volta à pose inicial, por isso o loop nêo pula. Fonte: OpenAI.</figcaption></figure>
+    <figure><img src="assets/ex-logo.svg" alt="Logo vetorial de uma padaria com pêo e trigo" loading="lazy" style="background:#f4efe6"><figcaption>Logo em SVG: vetor de verdade, com formas editáveis. Fonte: OpenAI.</figcaption></figure>
     <figure><img src="assets/ex-traducao.jpg" alt="Infográfico de máquina de café e a mesma arte traduzida para espanhol" loading="lazy"><figcaption>Bônus: traduzir o texto de um infográfico mantendo o desenho igual. Confira palavras que ficaram no idioma original. Fonte: OpenAI.</figcaption></figure>
   </div>
 </div></section>
@@ -302,15 +302,15 @@ Não mude mais nada na imagem. Remova o círculo do resultado.</pre>
 <section id="limites"><div class="wrap">
   <span class="chip">Limites e custo</span>
   <h2>Onde ainda erra e quanto custa</h2>
-  <p class="sub">É uma evolução real em planejamento, texto, multidão, GIF e vetor. Mas confira sempre o resultado antes de usar. Os quatro casos abaixo vêm de testes práticos com o 2.6; a OpenAI cita como limites gerais texto, consistência e posição exata.</p>
+  <p class="sub">É uma evoluçêo real em planejamento, texto, multidêo, GIF e vetor. Mas confira sempre o resultado antes de usar. Os quatro casos abaixo vêm de testes práticos com o 2.6; a OpenAI cita como limites gerais texto, consistência e posiçêo exata.</p>
   <div class="grid g4">
-    <div class="card"><h3>✋ Mão e pulso</h3><p>Ainda saem dedos a menos e pulso invertido, mesmo em qualidade alta.</p></div>
-    <div class="card"><h3>📏 Proporção</h3><p>Objetos em escala erram: Júpiter pequeno demais, cartas de tamanhos diferentes.</p></div>
-    <div class="card"><h3>🪞 Reflexo</h3><p>Espelho mostra o que não deveria ou esquece objetos da cena.</p></div>
+    <div class="card"><h3>✋ Mêo e pulso</h3><p>Ainda saem dedos a menos e pulso invertido, mesmo em qualidade alta.</p></div>
+    <div class="card"><h3>📏 Proporçêo</h3><p>Objetos em escala erram: Júpiter pequeno demais, cartas de tamanhos diferentes.</p></div>
+    <div class="card"><h3>🪞 Reflexo</h3><p>Espelho mostra o que nêo deveria ou esquece objetos da cena.</p></div>
     <div class="card"><h3>🔢 Contagem</h3><p>"Exatamente sete" pode virar cinco. Se o número importa, confira.</p></div>
   </div>
   <h3 style="margin:34px 0 8px;font-size:1.15rem">Preço</h3>
-  <p class="mut" style="margin:0 0 10px">A OpenAI cobra por token, a unidade com que ela mede o que entra e o que sai do modelo: uma imagem quadrada gasta de algumas centenas a alguns milhares de tokens, conforme a qualidade. Por token, o 2.6 custa o mesmo que o 2.5 (imagem na saída a US$ 30 por milhão). A diferença está em quantos tokens ele gasta: nas qualidades <b>low</b> e <b>medium</b> o 2.6 gasta mais; de <b>high</b> para cima, gasta o mesmo.</p>
+  <p class="mut" style="margin:0 0 10px">A OpenAI cobra por token, a unidade com que ela mede o que entra e o que sai do modelo: uma imagem quadrada gasta de algumas centenas a alguns milhares de tokens, conforme a qualidade. Por token, o 2.6 custa o mesmo que o 2.5 (imagem na saída a US$ 30 por milhêo). A diferença está em quantos tokens ele gasta: nas qualidades <b>low</b> e <b>medium</b> o 2.6 gasta mais; de <b>high</b> para cima, gasta o mesmo.</p>
   <div class="bars" role="img" aria-label="Custo por imagem 1024x1024 na calculadora oficial: low 2.5 = 0,6 centavo, 2.6 = 2,5 centavos; medium 2.5 = 1,3, 2.6 = 4,4; high 5,3 nos dois; max 21,1 nos dois">
     <div class="bar"><span>low · 2.5</span><div class="tr"><div class="fi" style="width:3%"></div></div><span class="v">0,6¢</span></div>
     <div class="bar"><span>low · 2.6</span><div class="tr"><div class="fi" style="width:12%"></div></div><span class="v">2,5¢</span></div>
@@ -321,8 +321,8 @@ Não mude mais nada na imagem. Remova o círculo do resultado.</pre>
     <div class="bar"><span>max · os dois</span><div class="tr"><div class="fi" style="width:100%"></div></div><span class="v">21,1¢</span></div>
   </div>
   <p class="mut" style="font-size:.85rem;margin:4px 0 18px">Custo de saída de uma imagem 1024×1024, em centavos de dólar, pela <a href="https://developers.openai.com/api/docs/guides/image-generation#calculating-costs" target="_blank" rel="noopener">calculadora oficial da OpenAI</a> (consultada em 07/11/2026). No low o 2.6 sai 4,2× mais caro que o 2.5; no medium, 3,3×; do high para cima, igual. O texto do prompt e as imagens de entrada somam um pouco mais.</p>
-  <div class="warn">Caminho econômico: rascunhos no <b>Flare</b> em qualidade <b>low</b> ou <b>medium</b>; só a peça final no <b>Sunburst</b> em qualidade <b>high</b>. A complexidade e o markup não têm cobrança extra; o SVG cobra a imagem de referência mais os tokens do vetor.</div>
-  <p class="mut" style="font-size:.85rem">Fontes: <a href="https://developers.openai.com/api/docs/guides/image-prompting?model=gpt-image-2.6" target="_blank" rel="noopener">guia de prompts do GPT Image 2.6</a>, <a href="https://developers.openai.com/api/docs/guides/image-generation" target="_blank" rel="noopener">guia de geração de imagem</a> e <a href="https://developers.openai.com/api/docs/pricing" target="_blank" rel="noopener">preços</a> (OpenAI, consultados em 07/11/2026).</p>
+  <div class="warn">Caminho econômico: rascunhos no <b>Flare</b> em qualidade <b>low</b> ou <b>medium</b>; só a peça final no <b>Sunburst</b> em qualidade <b>high</b>. A complexidade e o markup nêo têm cobrança extra; o SVG cobra a imagem de referência mais os tokens do vetor.</div>
+  <p class="mut" style="font-size:.85rem">Fontes: <a href="https://developers.openai.com/api/docs/guides/image-prompting?model=gpt-image-2.6" target="_blank" rel="noopener">guia de prompts do GPT Image 2.6</a>, <a href="https://developers.openai.com/api/docs/guides/image-generation" target="_blank" rel="noopener">guia de geraçêo de imagem</a> e <a href="https://developers.openai.com/api/docs/pricing" target="_blank" rel="noopener">preços</a> (OpenAI, consultados em 07/11/2026).</p>
 </div></section>
 
 <footer>

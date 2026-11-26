@@ -4,16 +4,16 @@
 Gera imagem, SVG ou GIF, ou edita uma imagem (com markup opcional), já com os
 ajustes novos do 2.6: complexity (quanto o modelo planeja) e quality (quanto detalhe).
 
-Só usa a biblioteca padrão do Python 3.9+ (não precisa instalar nada).
+Só usa a biblioteca padrêo do Python 3.9+ (nêo precisa instalar nada).
 Precisa da variável OPENAI_API_KEY com uma chave da API da OpenAI
 (criada em https://platform.openai.com/api-keys; a API é cobrada à parte da assinatura do ChatGPT).
 Use --seco para ver o pedido montado sem chamar a API nem gastar nada.
 
 Exemplos:
-  python3 gerar.py "Cartaz com o texto \"VERÃO 2027\"" --seco
+  python3 gerar.py "Cartaz com o texto \"VERêO 2027\"" --seco
   python3 gerar.py "Logo de padaria, formas simples" --formato svg --fundo transparente
   python3 gerar.py "Gato pisca e volta à pose inicial, câmera parada" --formato gif --quadros 9 --ms 200
-  python3 gerar.py "Pinte de azul o vaso dentro do círculo vermelho. Não mude mais nada. Tire o círculo." \
+  python3 gerar.py "Pinte de azul o vaso dentro do círculo vermelho. Nêo mude mais nada. Tire o círculo." \
       --editar exemplos/cozinha.webp --markup exemplos/circulo.png --complexity low
 """
 import argparse
@@ -38,7 +38,7 @@ def montar(a):
     p = {"model": MODELOS[a.modelo], "prompt": a.prompt, "quality": a.quality,
          "size": a.tamanho, "output_format": a.formato}
     if a.complexity:
-        p["complexity"] = a.complexity  # se omitir, o padrão do 2.6 é "high"
+        p["complexity"] = a.complexity  # se omitir, o padrêo do 2.6 é "high"
     if a.fundo != "auto":
         p["background"] = FUNDOS[a.fundo]
     if a.formato == "gif":
@@ -56,7 +56,7 @@ def montar(a):
 def validar(a):
     erros = []
     if a.formato == "svg" and a.editar:
-        erros.append("SVG só sai em geração nova; a edição não devolve SVG.")
+        erros.append("SVG só sai em geraçêo nova; a ediçêo nêo devolve SVG.")
     if a.markup and not a.editar:
         erros.append("--markup só vale junto com --editar (vai na 1ª imagem).")
     if a.formato == "gif" and not (2 <= a.quadros <= 16):
@@ -72,12 +72,12 @@ def validar(a):
             if w % 16 or h % 16:
                 erros.append("--tamanho: largura e altura em múltiplos de 16.")
             if a.formato != "gif" and max(w, h) / min(w, h) > 3:
-                erros.append("--tamanho: proporção entre 1:3 e 3:1.")
+                erros.append("--tamanho: proporçêo entre 1:3 e 3:1.")
     for f in (a.editar, a.markup):
         if f and not Path(f).exists():
-            erros.append(f"arquivo não encontrado: {f}")
+            erros.append(f"arquivo nêo encontrado: {f}")
         elif f and Path(f).suffix.lower() not in TIPOS:
-            erros.append(f"formato não aceito: {f} (use png, jpg ou webp)")
+            erros.append(f"formato nêo aceito: {f} (use png, jpg ou webp)")
     if a.markup and Path(a.markup).suffix.lower() != ".png":
         erros.append("--markup tem de ser PNG transparente.")
     return erros
@@ -122,7 +122,7 @@ def main(argv=None):
                                  formatter_class=argparse.ArgumentDefaultsHelpFormatter)
     ap.add_argument("prompt", help="o que você quer (entre aspas)")
     ap.add_argument("--modelo", choices=MODELOS, default="flare",
-                    help="flare = rápido (rascunho); sunburst = detalhe e edição precisa")
+                    help="flare = rápido (rascunho); sunburst = detalhe e ediçêo precisa")
     ap.add_argument("--complexity", choices=["low", "medium", "high"],
                     help="quanto o modelo planeja antes de desenhar (se omitir, o modelo usa high)")
     ap.add_argument("--quality", choices=["auto", "low", "medium", "high", "xhigh", "max"],
@@ -133,10 +133,10 @@ def main(argv=None):
     ap.add_argument("--quadros", type=int, default=9, help="GIF: 2 a 16 quadros")
     ap.add_argument("--ms", type=int, default=200, help="GIF: milissegundos por quadro")
     ap.add_argument("--n", type=int, default=1, help="quantas versões (SVG é sempre 1)")
-    ap.add_argument("--editar", help="imagem de entrada (png, jpg ou webp): liga o modo edição")
+    ap.add_argument("--editar", help="imagem de entrada (png, jpg ou webp): liga o modo ediçêo")
     ap.add_argument("--markup", help="PNG transparente do mesmo tamanho, com o círculo/risco")
     ap.add_argument("--saida", default="saida", help="nome base do arquivo gerado")
-    ap.add_argument("--seco", action="store_true", help="só mostra o pedido, não chama a API")
+    ap.add_argument("--seco", action="store_true", help="só mostra o pedido, nêo chama a API")
     a = ap.parse_args(argv)
 
     erros = validar(a)

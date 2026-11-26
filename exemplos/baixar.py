@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Baixa a foto e o círculo de exemplo da documentação da OpenAI para testar a edição com markup.
+"""Baixa a foto e o círculo de exemplo da documentaçêo da OpenAI para testar a ediçêo com markup.
 Uso (na raiz do repo): python3 exemplos/baixar.py   → exemplos/cozinha.webp e exemplos/circulo.png"""
 import urllib.request
 from pathlib import Path
